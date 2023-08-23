@@ -108,15 +108,15 @@ div.right a.facebook {
 }
 
 div.right a.instagram {
-  background: #d1231a;
+  background: #51c247;
   -moz-transition: all 0.15s ease-in-out;
   -o-transition: all 0.15s ease-in-out;
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
 }
 
-div.right a.github {
-  background: #000000;
+div.right a.youtube {
+  background: #c41010;
   -moz-transition: all 0.15s ease-in-out;
   -o-transition: all 0.15s ease-in-out;
   -webkit-transition: all 0.15s ease-in-out;
@@ -142,4 +142,3 @@ a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
 }
-
