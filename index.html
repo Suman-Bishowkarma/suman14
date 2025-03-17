@@ -1,16 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Clock</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="clock">
-        <div id="date"></div>
-        <div id="time"></div>
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+CAESAR CIPHER CRYPOGRAPHY
+ 
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+ 
+int main() {
+    int i, x;
+    char str[100];
+    int key = 3;
+ 
+    printf("Enter a message:\n");
+    fgets(str, sizeof(str), stdin);
+    str[strcspn(str, "\n")] = '\0';  // Remove trailing newline
+ 
+    while (1) {
+        printf("\nPlease choose the following options:\n");
+        printf("1 = Encrypt the string.\n");
+        printf("2 = Decrypt the string.\n");
+        printf("3 = Exit\n");
+        scanf("%d", &x);
+        while (getchar() != '\n');  // Clear input buffer
+ 
+        switch (x) {
+            case 1:
+                for (i = 0; str[i] != '\0'; i++)
+                    str[i] += key;  // Encrypt by shifting characters
+                printf("\nEncrypted string: %s\n", str);
+                break;
+ 
+            case 2:
+                for (i = 0; str[i] != '\0'; i++)
+                    str[i] -= key;  // Decrypt by shifting back
+                printf("\nDecrypted string: %s\n", str);
+                break;
+ 
+            case 3:
+                exit(0);
+ 
+            default:
+                printf("\nError: Invalid option. Try again.\n");
+        }
+    }
+ 
+    return 0;
+}
+ 
+ 
+VIGENERE CIPHER CRYPOGRAPHY
+ 
+ 
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+ 
+int main() {
+    char msg[15];
+    char key[15];
+ 
+    printf("Enter the message with less than length 16\n");
+    fgets(msg, sizeof(msg), stdin);
+    msg[strcspn(msg, "\n")] = 0; // Remove newline character
+ 
+    printf("Enter the Key\n");
+    fgets(key, sizeof(key), stdin);
+    key[strcspn(key, "\n")] = 0; // Remove newline character
+ 
+    int msgLen = strlen(msg), keyLen = strlen(key), i, j;
+ 
+    for (int a = 0; msg[a] != '\0'; a++) {
+        msg[a] = toupper(msg[a]); // Convert lowercase to uppercase
+    }
+ 
+    char newKey[msgLen + 1], encryptedMsg[msgLen + 1], decryptedMsg[msgLen + 1];
+ 
+    // Generating new key
+    for (i = 0, j = 0; i < msgLen; ++i, ++j) {
+        if (j == keyLen)
+            j = 0;
+ 
+        newKey[i] = toupper(key[j]); // Convert key to uppercase
+    }
+    newKey[msgLen] = '\0';
+ 
+    // Encryption
+    for (i = 0; i < msgLen; ++i) {
+        encryptedMsg[i] = ((msg[i] - 'A' + newKey[i] - 'A') % 26) + 'A';
+    }
+    encryptedMsg[msgLen] = '\0';
+ 
+    // Decryption
+    for (i = 0; i < msgLen; ++i) {
+        decryptedMsg[i] = (((encryptedMsg[i] - newKey[i] + 26) % 26) + 'A');
+    }
+    decryptedMsg[msgLen] = '\0';
+ 
+    // Displaying message information
+    printf("Original Message: %s", msg);
+    printf("\nKey: %s", key);
+    printf("\nNew Generated Key: %s", newKey);
+    printf("\nEncrypted Message: %s", encryptedMsg);
+    printf("\nDecrypted Message: %s\n", decryptedMsg);
+ 
+    return 0;
+}
